@@ -5,6 +5,16 @@ const client = new Client({
 
 const app = require("express")();
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+  next();
+});
+
 app.get("/groups/:group", (req, res) => {
   listMessagesInGroup(req.params.group)
     .then(snap => res.send(snap))
@@ -13,7 +23,7 @@ app.get("/groups/:group", (req, res) => {
 
 app.get("/groups", (req, res) => {
   listAllGroups()
-    .then(snap => res.send(snap))
+    .then(snap => res.json(snap))
     .catch(err => console.error(err));
 });
 
