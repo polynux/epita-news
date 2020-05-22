@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsgroupService } from '../services/newsgroup.service';
 import { Subscription } from 'rxjs';
 import { MessagesService } from '../services/messages.service';
 
@@ -12,10 +11,7 @@ export class MessageListComponent implements OnInit {
   messages = [];
   messagesSubscription: Subscription;
 
-  constructor(
-    private news: NewsgroupService,
-    private messagesService: MessagesService
-  ) {}
+  constructor(private messagesService: MessagesService) {}
 
   alert(text) {
     window.alert(text);
