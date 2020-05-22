@@ -34,15 +34,18 @@ app.get("/", (req, res) => {
 app.listen(8000);
 
 function listAllGroups() {
-  return client.connect().then(res => {
-    return client.list().then(res => {
-      let group = [];
-      for (let i = 0; i < Object.keys(res.newsgroups).length; i++) {
-        group.push(res.newsgroups[i].name);
-      }
-      return group;
-    });
-  });
+  return client
+    .connect()
+    .then(res => {
+      return client.list().then(res => {
+        let group = [];
+        for (let i = 0; i < Object.keys(res.newsgroups).length; i++) {
+          group.push(res.newsgroups[i].name);
+        }
+        return group;
+      });
+    })
+    .catch(err => console.error(err));
 }
 
 function listMessagesInGroup(group) {
@@ -55,7 +58,7 @@ function listMessagesInGroup(group) {
           messages.push(
             client
               .body(i)
-              .then(res => res.article.body.join())
+              .then(res => res)
               .catch(() => messages.slice(i, 1))
           );
         }
