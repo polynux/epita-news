@@ -1,0 +1,9 @@
+<div class="messages-container">
+  <p
+    *ngFor="let message of messages"
+    (click)="alert(message.article.messageId)"
+    class="message"
+  >
+    {{ message.article.body }}
+  </p>
+</div>
