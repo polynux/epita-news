@@ -10,4 +10,8 @@ export class NewsgroupService {
   getGroups() {
     return this.httpClient.get('http://localhost:8000/groups');
   }
+
+  getMessagesFromGroup(group: string) {
+    return this.httpClient.get('http://localhost:8000/groups/' + group);
+  }
 }
